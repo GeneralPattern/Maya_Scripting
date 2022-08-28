@@ -1,0 +1,143 @@
+//Create First Body Segment
+polySphere -radius 3 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 3 0;
+
+//First Segment Legs
+polyCylinder -r .5 -h 2 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -rcp 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 0 2;
+rotate -r -os -fo -30 0 0 ;
+
+polyCylinder -r .5 -h 2 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -rcp 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 0 -2;
+rotate -r -os -fo 30 0 0 ;
+
+//Duplicate four times
+select -r pSphere1;
+select -tgl pCylinder1;
+select -tgl pCylinder2;
+duplicate -returnRootsOnly;
+move -r 4 0 0;
+duplicate -returnRootsOnly;
+move -r 4 0 0;
+duplicate -returnRootsOnly;
+move -r 4 0 0;
+duplicate -returnRootsOnly;
+move -r 4 0 0;
+
+//Create and Place Head
+polySphere -r 3.2 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 20 5 0;
+
+//Create Eyes
+polySphere -r .75 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 22 6 2;
+
+polySphere -r .75 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 22 6 -2;
+
+//Create Mouth from Cylinder
+polyCylinder -r 2 -h .5 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -rcp 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 23 4.5 0;
+rotate -r -os -fo 0 0 70;
+
+//Selecting top half of faces and deleting then bridging the edges
+select -r pCylinder11.f[23] ;
+select -add pCylinder11.f[22] ;
+select -add pCylinder11.f[21] ;
+select -add pCylinder11.f[20] ;
+select -add pCylinder11.f[39] ;
+select -add pCylinder11.f[38] ;
+select -add pCylinder11.f[37] ;
+select -add pCylinder11.f[36] ;
+select -add pCylinder11.f[35] ;
+select -add pCylinder11.f[34] ;
+delete;
+select -r pCylinder11.f[33] ;
+select -add pCylinder11.f[32] ;
+select -add pCylinder11.f[31] ;
+select -add pCylinder11.f[30] ;
+select -add pCylinder11.f[49] ;
+select -add pCylinder11.f[48] ;
+select -add pCylinder11.f[47] ;
+select -add pCylinder11.f[46] ;
+select -add pCylinder11.f[45] ;
+select -add pCylinder11.f[44] ;
+delete;
+select -r pCylinder11.f[14] ;
+select -add pCylinder11.f[15] ;
+select -add pCylinder11.f[16] ;
+select -add pCylinder11.f[17] ;
+select -add pCylinder11.f[18] ;
+select -add pCylinder11.f[19] ;
+select -add pCylinder11.f[0] ;
+select -add pCylinder11.f[1] ;
+select -add pCylinder11.f[2] ;
+select -add pCylinder11.f[3] ;
+delete;
+select -r pCylinder11.e[20] ;
+select -add pCylinder11.e[30] ;
+polyBridgeEdge;
+
+//Antenna
+polyTorus -radius 1 -sectionRadius 0.5 -twist 0 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 1 -caching 1;
+move -relative -objectSpace -worldSpaceDistance 21 7.5 2;
+rotate -r -os -fo 100 0 0;
+scale -r 1 1 1.3 ;
+
+//Delete most of the faces of the ring
+select -r pTorus1.f[130] ;
+select -add pTorus1.f[110] ;
+select -add pTorus1.f[10] pTorus1.f[30] pTorus1.f[50] pTorus1.f[70] pTorus1.f[90] pTorus1.f[110] pTorus1.f[130] pTorus1.f[150] pTorus1.f[170] pTorus1.f[190] pTorus1.f[210] pTorus1.f[230] pTorus1.f[250] pTorus1.f[270] pTorus1.f[290] pTorus1.f[310] pTorus1.f[330] pTorus1.f[350] pTorus1.f[370] pTorus1.f[390] ;
+select -add pTorus1.f[131] ;
+select -add pTorus1.f[111] ;
+select -add pTorus1.f[11] pTorus1.f[31] pTorus1.f[51] pTorus1.f[71] pTorus1.f[91] pTorus1.f[111] pTorus1.f[131] pTorus1.f[151] pTorus1.f[171] pTorus1.f[191] pTorus1.f[211] pTorus1.f[231] pTorus1.f[251] pTorus1.f[271] pTorus1.f[291] pTorus1.f[311] pTorus1.f[331] pTorus1.f[351] pTorus1.f[371] pTorus1.f[391] ;
+select -add pTorus1.f[112] ;
+select -add pTorus1.f[92] ;
+select -add pTorus1.f[12] pTorus1.f[32] pTorus1.f[52] pTorus1.f[72] pTorus1.f[92] pTorus1.f[112] pTorus1.f[132] pTorus1.f[152] pTorus1.f[172] pTorus1.f[192] pTorus1.f[212] pTorus1.f[232] pTorus1.f[252] pTorus1.f[272] pTorus1.f[292] pTorus1.f[312] pTorus1.f[332] pTorus1.f[352] pTorus1.f[372] pTorus1.f[392] ;
+select -add pTorus1.f[113] ;
+select -add pTorus1.f[93] ;
+select -add pTorus1.f[13] pTorus1.f[33] pTorus1.f[53] pTorus1.f[73] pTorus1.f[93] pTorus1.f[113] pTorus1.f[133] pTorus1.f[153] pTorus1.f[173] pTorus1.f[193] pTorus1.f[213] pTorus1.f[233] pTorus1.f[253] pTorus1.f[273] pTorus1.f[293] pTorus1.f[313] pTorus1.f[333] pTorus1.f[353] pTorus1.f[373] pTorus1.f[393] ;
+select -add pTorus1.f[114] ;
+select -add pTorus1.f[94] ;
+select -add pTorus1.f[14] pTorus1.f[34] pTorus1.f[54] pTorus1.f[74] pTorus1.f[94] pTorus1.f[114] pTorus1.f[134] pTorus1.f[154] pTorus1.f[174] pTorus1.f[194] pTorus1.f[214] pTorus1.f[234] pTorus1.f[254] pTorus1.f[274] pTorus1.f[294] pTorus1.f[314] pTorus1.f[334] pTorus1.f[354] pTorus1.f[374] pTorus1.f[394] ;
+select -add pTorus1.f[115] ;
+select -add pTorus1.f[95] ;
+select -add pTorus1.f[15] pTorus1.f[35] pTorus1.f[55] pTorus1.f[75] pTorus1.f[95] pTorus1.f[115] pTorus1.f[135] pTorus1.f[155] pTorus1.f[175] pTorus1.f[195] pTorus1.f[215] pTorus1.f[235] pTorus1.f[255] pTorus1.f[275] pTorus1.f[295] pTorus1.f[315] pTorus1.f[335] pTorus1.f[355] pTorus1.f[375] pTorus1.f[395] ;
+select -add pTorus1.f[116] ;
+select -add pTorus1.f[96] ;
+select -add pTorus1.f[16] pTorus1.f[36] pTorus1.f[56] pTorus1.f[76] pTorus1.f[96] pTorus1.f[116] pTorus1.f[136] pTorus1.f[156] pTorus1.f[176] pTorus1.f[196] pTorus1.f[216] pTorus1.f[236] pTorus1.f[256] pTorus1.f[276] pTorus1.f[296] pTorus1.f[316] pTorus1.f[336] pTorus1.f[356] pTorus1.f[376] pTorus1.f[396] ;
+select -add pTorus1.f[117] ;
+select -add pTorus1.f[97] ;
+select -add pTorus1.f[17] pTorus1.f[37] pTorus1.f[57] pTorus1.f[77] pTorus1.f[97] pTorus1.f[117] pTorus1.f[137] pTorus1.f[157] pTorus1.f[177] pTorus1.f[197] pTorus1.f[217] pTorus1.f[237] pTorus1.f[257] pTorus1.f[277] pTorus1.f[297] pTorus1.f[317] pTorus1.f[337] pTorus1.f[357] pTorus1.f[377] pTorus1.f[397] ;
+select -add pTorus1.f[118] ;
+select -add pTorus1.f[98] ;
+select -add pTorus1.f[18] pTorus1.f[38] pTorus1.f[58] pTorus1.f[78] pTorus1.f[98] pTorus1.f[118] pTorus1.f[138] pTorus1.f[158] pTorus1.f[178] pTorus1.f[198] pTorus1.f[218] pTorus1.f[238] pTorus1.f[258] pTorus1.f[278] pTorus1.f[298] pTorus1.f[318] pTorus1.f[338] pTorus1.f[358] pTorus1.f[378] pTorus1.f[398] ;
+select -add pTorus1.f[119] ;
+select -add pTorus1.f[99] ;
+select -add pTorus1.f[19] pTorus1.f[39] pTorus1.f[59] pTorus1.f[79] pTorus1.f[99] pTorus1.f[119] pTorus1.f[139] pTorus1.f[159] pTorus1.f[179] pTorus1.f[199] pTorus1.f[219] pTorus1.f[239] pTorus1.f[259] pTorus1.f[279] pTorus1.f[299] pTorus1.f[319] pTorus1.f[339] pTorus1.f[359] pTorus1.f[379] pTorus1.f[399] ;
+select -add pTorus1.f[80];
+select -add pTorus1.f[60];
+select -add pTorus1.f[0] pTorus1.f[20] pTorus1.f[40] pTorus1.f[60] pTorus1.f[80] pTorus1.f[100] pTorus1.f[120] pTorus1.f[140] pTorus1.f[160] pTorus1.f[180] pTorus1.f[200] pTorus1.f[220] pTorus1.f[240] pTorus1.f[260] pTorus1.f[280] pTorus1.f[300] pTorus1.f[320] pTorus1.f[340] pTorus1.f[360] pTorus1.f[380] ;
+select -add pTorus1.f[81];
+select -add pTorus1.f[61];
+select -add pTorus1.f[1] pTorus1.f[21] pTorus1.f[41] pTorus1.f[61] pTorus1.f[81] pTorus1.f[101] pTorus1.f[121] pTorus1.f[141] pTorus1.f[161] pTorus1.f[181] pTorus1.f[201] pTorus1.f[221] pTorus1.f[241] pTorus1.f[261] pTorus1.f[281] pTorus1.f[301] pTorus1.f[321] pTorus1.f[341] pTorus1.f[361] pTorus1.f[381] ;
+delete;
+select -r pTorus1.e[322];
+select -add pTorus1.e[313];
+select -add pTorus1.e[160] pTorus1.e[169] pTorus1.e[178] pTorus1.e[187] pTorus1.e[196] pTorus1.e[205] pTorus1.e[214] pTorus1.e[223] pTorus1.e[232] pTorus1.e[241] pTorus1.e[250] pTorus1.e[259] pTorus1.e[268] pTorus1.e[277] pTorus1.e[286] pTorus1.e[295] pTorus1.e[304] pTorus1.e[313] pTorus1.e[322] pTorus1.e[331] ;
+performBridgeOrFill;
+
+select -r pTorus1.f[160];
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 21.58778563 -pvy 8.535744803 -pvz 2.182629663 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pTorus1.f[160];
+setAttr "polyExtrudeFace1.localTranslate" -type double3 0 0 0.3;
+
+select -r pTorus1.e[214];
+select -add pTorus1.e[223];
+select -add pTorus1.e[160] pTorus1.e[169] pTorus1.e[178] pTorus1.e[187] pTorus1.e[196] pTorus1.e[205] pTorus1.e[214] pTorus1.e[223] pTorus1.e[232] pTorus1.e[241] pTorus1.e[250] pTorus1.e[259] pTorus1.e[268] pTorus1.e[277] pTorus1.e[286] pTorus1.e[295] pTorus1.e[304] pTorus1.e[313] pTorus1.e[322] pTorus1.e[331] ;
+scale -r -p 21.587785cm 8.535744cm 2.182629cm 1 1.371055 1.371055;
+
+//Duplicate Antenna
+select -r pTorus1;
+duplicate -rr;
+move -r 0 0 -4;
+rotate -r -40 0 0;
