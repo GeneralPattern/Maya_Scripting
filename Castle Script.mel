@@ -1,0 +1,87 @@
+//Change these variables to change the castle size and height
+int $castleKeep[] = {2, 2, 4};
+
+//To change to a big square flag set $flagshape = 1
+//To change to a small wavy triangle flag set $flagshape = 2
+
+int $flagshape = 1;
+
+//Children attributes
+float $castleKeepHeight;
+$castleKeepHeight = $castleKeep[2] / 2;
+
+int $castleWallsFront;
+$castleWallsFront = $castleKeep[0] * 3;
+
+int $castleWallsSide;
+$castleWallsSide = $castleKeep[1] * 3;
+
+int $castleWallsDepth;
+$castleWallsDepth = $castleKeep[1] / 2;
+
+int $cornerPillarsRadius;
+$cornerPillarsRadius = $castleKeep[0] / 2;
+
+int $cornerPillarHeight;
+$cornerPillarHeight = $castleKeep[2];
+
+
+//Create Castle Main Keep
+polyCube -subdivisionsX 9 -subdivisionsZ 9 -depth $castleKeep[0] -width $castleKeep[1] -height $castleKeep[2];
+move -r 0 $castleKeepHeight 0;
+
+polyCube -subdivisionsX 9 -subdivisionsZ 9  -depth $castleWallsDepth -width $castleWallsFront -height $castleKeepHeight;
+move -r 0 ($castleKeepHeight/2) ($castleKeep[0] * 2);
+select -r pCube2;
+duplicate;
+move -r 0 0 (-$castleKeep[0] * 4);
+rotate -r 0 180 0;
+
+polyCube -subdivisionsX 9 -subdivisionsZ 9 -subdivisionsY 2 -depth $castleWallsDepth -width $castleWallsFront -height $castleKeepHeight;
+move -r 0 ($castleKeepHeight/2) ($castleKeep[0] * 2);
+duplicate;
+move -r 0 0 (-$castleKeep[0] * 4);
+select -tgl pCube2;
+group;
+rotate 0 90 0;
+
+
+
+//Create Corner Pillars
+polyCylinder -radius $cornerPillarsRadius -height $cornerPillarHeight;
+move -r (-$castleKeep[0] * 2) ($castleKeepHeight) (-$castleKeep[0] * 2);
+
+//Create cone and group it with pillars, then duplicate to each corner
+polyCone -radius ($cornerPillarsRadius + 1) -height ($cornerPillarHeight / 2);
+move -r (-$castleKeep[0] * 2) ($castleKeepHeight * 2.5) (-$castleKeep[0] * 2);
+select -tgl pCylinder1;
+group;
+duplicate;
+move -r ($castleKeep[0] * 4) 0 0;
+duplicate;
+move -r  0 0 ($castleKeep[0] * 4);
+duplicate;
+move -r  (-$castleKeep[0] * 4) 0 0;
+
+//Castle Keep Battlement Extrusions
+select -r pCube1.f[9] ;
+select -tgl pCube1.f[11] ;
+select -tgl pCube1.f[13] ;
+select -tgl pCube1.f[15] ;
+select -tgl pCube1.f[17] ;
+select -tgl pCube1.f[35] ;
+select -tgl pCube1.f[53] ;
+select -tgl pCube1.f[71] ;
+select -tgl pCube1.f[89] ;
+select -tgl pCube1.f[81] ;
+select -tgl pCube1.f[83] ;
+select -tgl pCube1.f[85] ;
+select -tgl pCube1.f[87] ;
+select -tgl pCube1.f[63] ;
+select -tgl pCube1.f[45] ;
+select -tgl pCube1.f[27] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -2.980232239e-08 -pvy 4 -pvz 0 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pCube1.f[9] pCube1.f[11] pCube1.f[13] pCube1.f[15] pCube1.f[17] pCube1.f[27] pCube1.f[35] pCube1.f[45] pCube1.f[53] pCube1.f[63] pCube1.f[71] pCube1.f[81] pCube1.f[83] pCube1.f[85] pCube1.f[87] pCube1.f[89];
+setAttr "polyExtrudeFace1.localTranslate" -type double3 0 0 0.25;
+
+//Create flag
+
