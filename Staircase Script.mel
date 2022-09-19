@@ -1,0 +1,38 @@
+proc spiralStaircase(int $StairNumber, float $stairWidth, float $StairHeight, float $stairDepth, float $StairDifference)
+{
+    //Creates Center pillar
+    float $HandrailOffset = ($stairWidth / 2.5); 
+    polyCylinder -radius ($stairWidth / 2) -height ($StairNumber *$StairHeight);
+    move 0 ($StairHeight * $StairNumber / 2) $stairWidth;
+    for ($i = 1; $i < $StairNumber; $i++)
+    {
+    //Creates steps
+        polyCube -depth $stairWidth -height $StairHeight -width $stairDepth;
+        xform -piv 0 0 $stairWidth;
+        rotate -r 0 ($i * 20) 0;
+        move -r 0 ($i * $StairHeight) 0;
+
+
+    //Create Hand Rail pole
+        polyCylinder -radius ($stairDepth / 4) -height ($StairHeight * 4);
+        move -r 0 0 (-$HandrailOffset);
+        xform -piv 0 0 ($stairWidth + $HandrailOffset); 
+        rotate -r 0 ($i * 20) 0;
+        move -r 0 ($i * $StairHeight + $StairHeight * 2) 0;
+            
+    }
+
+    // For loop to create the hand rail
+
+    for ($i = 1; $i < ($StairNumber * 4); $i++)
+    {
+        polyCube -depth ($stairDepth / 2) -height ($stairDepth / 2) -width ($stairDepth / 2);
+        move -r 0 ($StairHeight * 4) (-$HandrailOffset);
+        xform -piv 0 0 ($stairWidth + $HandrailOffset);
+        rotate -r 0 ($i * 5) 0;
+        move -r 0 ($i * (0.25 * $StairHeight)) 0;
+        
+    }
+}
+
+spiralStaircase(40, 8, 2, 4, 2);
