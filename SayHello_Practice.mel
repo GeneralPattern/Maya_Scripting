@@ -1,0 +1,27 @@
+proc SayHello(string $name)
+{
+    print (" Hello" + $name + "!");
+}
+
+SayHello("Cory");
+
+proc string NamePicker()
+{
+    string $names[] = {"Dave","Daisy","Jared","Bruce","Euguene","Berry","Johnny"};
+    int $size = size($names);
+    int $randnum = `rand $size`;
+    //print ($names[$randnum] + "\n");
+
+    return ($names[$randnum]);
+}
+
+proc int RandomNumber(int $num)
+{
+    int$randnum = `rand $num`;
+    print ("this random number is " + $randnum + "\n");
+    return ($randnum);
+}
+
+print (RandomNumber(100) + RandomNumber(100));
+
+print (NamePicker() + "'s favorite number is " + RandomNumber(100) + "!\n");
