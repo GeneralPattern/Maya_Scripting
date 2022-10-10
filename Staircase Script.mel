@@ -35,4 +35,4 @@ proc spiralStaircase(int $StairNumber, float $stairWidth, float $StairHeight, fl
     }
 }
 
-spiralStaircase(40, 8, 2, 4, 2);
+spiralStaircase(30, 10, 2, 4, 2);

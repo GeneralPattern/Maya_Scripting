@@ -1,0 +1,25 @@
+global proc Add()
+{
+    float $sum = 3.5 + 5.3;
+    print ("The sum is " + $sum);
+}
+
+string $mWindow = "my_tools_ui";
+if (`window -exists "my_tools_ui"`)
+    deleteUI $myWindow;
+
+string $mWindow = `window -height 300
+                        -title "super Cool Window"
+                        -sizeable 1
+                        -width 400
+                        "$mWindow"`;
+string $mColumn = `columnLayout -adjustableColumn 1
+                                -parent $mWindow`;
+
+button -parent $mColumn -label "Say Hello!" -command "print (\"Hello World!\")";
+
+
+
+button -parent $mColumn -label "Add numbers" -command Add;
+showWindow $mWindow;
+

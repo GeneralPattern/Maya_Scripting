@@ -1,0 +1,80 @@
+global proc RandomPlacer(int $DupilcationNum, int $minX, int $maxX, int $minY, int $maxY, int $minZ, int $maxZ)
+{
+    int $randX = `rand $minX $maxX`;
+    int $randY = `rand $minY $maxY`;
+    int $randZ = `rand $minZ $maxZ`;
+    move $randX $randY $randZ;
+    for($i = 0; $i < ($DupilcationNum - 1); $i++)
+    {
+        Duplicate;
+        int $randX = `rand $minX $maxX`;
+        int $randY = `rand $minY $maxY`;
+        int $randZ = `rand $minZ $maxZ`;
+        move $randX $randY $randZ;
+    }
+        
+}
+
+//RandomPlacer(80,-10,15,-10,15,-10,15);
+
+global proc UIcmd()
+{
+    string $firstNumField = `optionVar -q "duplicationNum"`;
+    string $secondNumField = `optionVar -q "minX"`;
+    string $thirdNumField = `optionVar -q "maxX"`;
+    string $fourthNumField = `optionVar -q "minY"`;
+    string $fifthNumField = `optionVar -q "maxY"`;
+    string $sixthNumField = `optionVar -q "minZ"`;
+    string $seventhNumField = `optionVar -q "maxZ"`;
+    
+
+    string $NumofDuplications = `intField -q -value $firstNumField`;
+    string $minXnum = `intField -q -value $secondNumField`;
+    string $maxXnum = `intField -q -value $thirdNumField`;
+    string $minYnum = `intField -q -value $fourthNumField`;
+    string $maxYnum = `intField -q -value $fifthNumField`;
+    string $minZnum = `intField -q -value $sixthNumField`;
+    string $maxZnum = `intField -q -value $seventhNumField`;
+    
+    RandomPlacer($NumofDuplications,$minXnum,$maxXnum,$minYnum,$maxYnum,$minZnum,$maxZnum);
+
+}
+
+global proc PlacerUI()
+{
+string $mWindow = `window -title "Random Placer"`;
+
+if (`window -exists $mWindow`)
+    deleteUI $mWindow;
+
+$mWindow = `window -title "Random Placer"`;
+string $mColumn = `columnLayout`;
+string $Column2 = `columnLayout`;
+text -label "Number of Duplications";
+optionVar -stringValue "duplicationNum" `intField`;
+
+text -label "Minimum X Range";
+optionVar -stringValue "minX" `intField`;
+
+text -label "Maximum X Range";
+optionVar -stringValue "maxX" `intField`;
+
+text -label "Minimum Y Range";
+optionVar -stringValue "minY" `intField`;
+
+text -label "Maximum Y Range";
+optionVar -stringValue "maxY" `intField`;
+
+text -label "Minimum Z Range";
+optionVar -stringValue "minZ" `intField`;
+
+text -label "Maximum Z Range";
+optionVar -stringValue "maxZ" `intField`;
+
+
+
+
+button -label "Duplicate" -command UIcmd;
+showWindow;
+}
+PlacerUI;
