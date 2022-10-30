@@ -4,6 +4,7 @@ global proc RandomPlacer(int $DupilcationNum, int $minX, int $maxX, int $minY, i
     int $randY = `rand $minY $maxY`;
     int $randZ = `rand $minZ $maxZ`;
     move $randX $randY $randZ;
+    
     for($i = 0; $i < ($DupilcationNum - 1); $i++)
     {
         Duplicate;
@@ -14,8 +15,6 @@ global proc RandomPlacer(int $DupilcationNum, int $minX, int $maxX, int $minY, i
     }
         
 }
-
-//RandomPlacer(80,-10,15,-10,15,-10,15);
 
 global proc UIcmd()
 {
@@ -44,12 +43,21 @@ global proc PlacerUI()
 {
 string $mWindow = `window -title "Random Placer"`;
 
+
+
 if (`window -exists $mWindow`)
     deleteUI $mWindow;
 
+
+
 $mWindow = `window -title "Random Placer"`;
+
+
+
 string $mColumn = `columnLayout`;
 string $Column2 = `columnLayout`;
+
+
 text -label "Number of Duplications";
 optionVar -stringValue "duplicationNum" `intField`;
 
