@@ -15,8 +15,3 @@ def SeqRenamer(txt, num):
         print(x)
 
 SeqRenamer(sequenceName, sequenceLength)
-
-#leg_#####_jnt_###
-
-#leg_00000001_jnt
-#leg_000000_jnt_01
